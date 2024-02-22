@@ -9,6 +9,8 @@ This tool provides a comprehensive visualization of Bitcoin transaction data, of
 - **Transaction Count Chart**: Visualizes the number of Bitcoin transactions per day, allowing users to identify trends and patterns in transaction activity over time.
 - **Total Fee Chart**: Displays the total fee value in BTC for transactions per day, providing insights into the economic aspects of the Bitcoin network.
 - **Average Fee Chart**: Shows the average fee per transaction in BTC, offering a perspective on the cost of Bitcoin transactions and network congestion.
+- **Transaction By Address**: Shows the received and sent transaction in BTC by address, offering a perspective on the net ratio.
+
 
 ## Getting Started
 
@@ -16,15 +18,11 @@ To use this tool, simply navigate to the web interface and enter the Bitcoin add
 
 ## Screenshots
 
-### Transaction Count Chart, Total Fee Chart, Average Fee Chart
-(/Users/pawankumarkrishnan/Desktop/crypto/crypto-app/frontend/my-app/src/transaction.png)
-
-This chart illustrates the daily transaction count, highlighting the fluctuations in Bitcoin network activity.
-The total fees in BTC collected each day, reflecting the economic throughput of the Bitcoin network.
-The average transaction fee in BTC, providing insights into the cost of transactions and network congestion levels.
+### 
+![Total Fee Chart](frontend/my-app/src/transaction.png)
 
 ### 
-![Total Fee Chart](/Users/pawankumarkrishnan/Desktop/crypto/crypto-app/frontend/my-app/src/transaction.png)
+![Transaction By Address](frontend/my-app/src/addressTransaction.png)
 
  
 
