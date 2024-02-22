@@ -17,14 +17,14 @@ To use this tool, simply navigate to the web interface and enter the Bitcoin add
 ## Screenshots
 
 ### Transaction Count Chart, Total Fee Chart, Average Fee Chart
-(frontend/my-app/src/Screenshot 2024-02-22 at 6.33.52 PM.png)
+(/Users/pawankumarkrishnan/Desktop/crypto/crypto-app/frontend/my-app/src/transaction.png)
 
 This chart illustrates the daily transaction count, highlighting the fluctuations in Bitcoin network activity.
 The total fees in BTC collected each day, reflecting the economic throughput of the Bitcoin network.
 The average transaction fee in BTC, providing insights into the cost of transactions and network congestion levels.
 
 ### 
-![Total Fee Chart](/Users/pawankumarkrishnan/Desktop/crypto/crypto-app/frontend/my-app/src/Screenshot 2024-02-22 at 6.32.11 PM.png)
+![Total Fee Chart](/Users/pawankumarkrishnan/Desktop/crypto/crypto-app/frontend/my-app/src/transaction.png)
 
  
 
