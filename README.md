@@ -24,7 +24,7 @@ The total fees in BTC collected each day, reflecting the economic throughput of 
 The average transaction fee in BTC, providing insights into the cost of transactions and network congestion levels.
 
 ### 
-![Total Fee Chart](path/to/total-fee-chart.png)
+![Total Fee Chart](/Users/pawankumarkrishnan/Desktop/crypto/crypto-app/frontend/my-app/src/Screenshot 2024-02-22 at 6.32.11 PM.png)
 
  
 
