@@ -1,45 +1,37 @@
 openapi: 3.0.0
 info:
-  title: Bitcoin Transaction Data API
-  description: API for retrieving Bitcoin transaction data
+  title: BitQuery GraphQL API
+  description: API for querying Bitcoin transaction data via GraphQL
   version: 1.0.0
 servers:
-  - url: https://example.com/api/v1
+  - url: https://graphql.bitquery.io
 paths:
-  /bitcoin/transactions:
-    get:
-      summary: Retrieve Bitcoin transaction data
-      parameters:
-        - name: network
-          in: query
-          description: Name of the cryptocurrency network
-          required: true
-          schema:
-            type: string
-            example: bitcoin
-        - name: from
-          in: query
-          description: Start date for data retrieval (format: YYYY-MM-DD)
-          required: true
-          schema:
-            type: string
-            format: date
-            example: "2024-03-12"
-        - name: till
-          in: query
-          description: End date for data retrieval (format: YYYY-MM-DD)
-          required: true
-          schema:
-            type: string
-            format: date-time
-            example: "2024-03-19T23:59:59"
-        - name: dateFormat
-          in: query
-          description: Date format for response dates
-          required: true
-          schema:
-            type: string
-            example: "%Y-%m-%d"
+  /graphql:
+    post:
+      summary: Execute GraphQL query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The GraphQL query to execute
+                  example: |
+                    query {
+                      bitcoin {
+                        transactions(options: {asc: "date.date"}, date: {since: "2024-03-12", till: "2024-03-19T23:59:59"}) {
+                          date {
+                            date(format: "%Y-%m-%d")
+                          }
+                          count: countBigInt
+                          feeValue
+                          avgFee: feeValue(calculate: average)
+                        }
+                      }
+                    }
       responses:
         '200':
           description: Successful response
@@ -50,32 +42,7 @@ paths:
                 properties:
                   data:
                     type: object
-                    properties:
-                      bitcoin:
-                        type: object
-                        properties:
-                          transactions:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                date:
-                                  type: object
-                                  properties:
-                                    date:
-                                      type: string
-                                      example: "2024-03-12"
-                                count:
-                                  type: string
-                                  example: "341867"
-                                feeValue:
-                                  type: number
-                                  format: float
-                                  example: 38.60291378
-                                avgFee:
-                                  type: number
-                                  format: float
-                                  example: 0.00011291
+                    description: The response data based on the executed GraphQL query
         '400':
           description: Bad request
         '500':
