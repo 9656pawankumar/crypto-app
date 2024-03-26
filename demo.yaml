@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
-  title: Bitcoin Transactions API
+  title: Crypto Market Data API
   version: 1.0.0
 paths:
   /graphql:
     post:
-      summary: Query Bitcoin transactions
+      summary: Bitcoin Transactions Query
       requestBody:
         required: true
         content:
@@ -18,7 +18,6 @@ paths:
                   description: The GraphQL query string
                 variables:
                   type: object
-                  description: The variables used in the GraphQL query
                   properties:
                     network:
                       type: string
@@ -43,28 +42,67 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    description: The response data
-                    nullable: true
-                    # Add schema definition for the data returned
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        message:
-                          type: string
-                          description: Error message
-                        locations:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              line:
-                                type: integer
-                                description: Line number in the query where the error occurred
-                              column:
-                                type: integer
-                                description: Column number in the query where the error occurred
+                $ref: '#/components/schemas/BitcoinTransactionsResponse'
+
+components:
+  schemas:
+    BitcoinTransactionsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/BitcoinTransactionsData'
+          description: The response data
+          nullable: true
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/GraphQLError'
+          description: An array of GraphQL errors, if any
+
+    BitcoinTransactionsData:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitcoinTransaction'
+          description: List of Bitcoin transactions
+
+    BitcoinTransaction:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: Date of the transaction
+        count:
+          type: integer
+          description: Count of transactions
+        feeValue:
+          type: number
+          description: Fee value of the transaction
+        avgFee:
+          type: number
+          description: Average fee of the transaction
+
+    GraphQLError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorLocation'
+          description: Location of the error in the query
+
+    ErrorLocation:
+      type: object
+      properties:
+        line:
+          type: integer
+          description: Line number in the query where the error occurred
+        column:
+          type: integer
+          description: Column number in the query where the error occurred
