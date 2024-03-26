@@ -1,49 +1,15 @@
-openapi: 3.0.0
-info:
-  title: BitQuery GraphQL API
-  description: API for querying Bitcoin transaction data via GraphQL
-  version: 1.0.0
-servers:
-  - url: https://graphql.bitquery.io
-paths:
-  /graphql:
-    post:
-      summary: Execute GraphQL query
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                query:
-                  type: string
-                  description: The GraphQL query to execute
-                  example: |
-                    query {
-                      bitcoin {
-                        transactions(options: {asc: "date.date"}, date: {since: "2024-03-12", till: "2024-03-19T23:59:59"}) {
-                          date {
-                            date(format: "%Y-%m-%d")
-                          }
-                          count: countBigInt
-                          feeValue
-                          avgFee: feeValue(calculate: average)
-                        }
-                      }
-                    }
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    description: The response data based on the executed GraphQL query
-        '400':
-          description: Bad request
-        '500':
-          description: Internal server error
+ type Query {
+    bitcoinTransactions(
+      network: String!
+      from: String!
+      till: String!
+      dateFormat: String!
+    ): [BitcoinTransaction!]!
+  }
+
+  type BitcoinTransaction {
+    date: String!
+    count: String!
+    feeValue: Float!
+    avgFee: Float!
+  }
