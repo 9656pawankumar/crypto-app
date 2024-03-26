@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: Bitcoin Transactions API
+  version: 1.0.0
+paths:
+  /graphql:
+    post:
+      summary: Query Bitcoin transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The GraphQL query string
+                variables:
+                  type: object
+                  description: The variables used in the GraphQL query
+                  properties:
+                    network:
+                      type: string
+                      enum: 
+                        - MAINNET
+                        - TESTNET
+                      description: The Bitcoin network
+                    dateFormat:
+                      type: string
+                      description: The date format
+                    from:
+                      type: string
+                      format: date-time
+                      description: The start date
+                    till:
+                      type: string
+                      format: date-time
+                      description: The end date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: The response data
+                    nullable: true
+                    # Add schema definition for the data returned
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                          description: Error message
+                        locations:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              line:
+                                type: integer
+                                description: Line number in the query where the error occurred
+                              column:
+                                type: integer
+                                description: Column number in the query where the error occurred
